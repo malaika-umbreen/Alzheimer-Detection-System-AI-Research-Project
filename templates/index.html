@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Alzheimer's Disease Prediction</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!--GitHub icon-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Template Main CSS File -->
+  <link href="static/assets/css/style.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top  header-transparent ">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <a href="#"><img src="static/assets/img/Blue-Brain.png" alt="" class="img-fluid"> Alzheimer's Disease Prediction </a>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+            <li><a class="nav-link scrollto active" href="{{url_for('main')}}">Home</a></li>
+            <li><a class="nav-link scrollto" href="{{url_for('main')}}">Alzheimer's Disease Classifier</a></li>
+            <li><a class="nav-link scrollto" href="{{url_for('main')}}">About Us</a></li>
+              <!-- other links -->
+    {% if session['loggedin'] %}
+    <a href="{{ url_for('history') }}">History</a>
+    {% endif %}
+            {% if 'username' in session %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">HI {{ session['username'] }}</a>
+           </li>
+        {% endif %}
+            
+            {% if 'username' in session %}
+          <!-- If the user is logged in, display the logout button -->
+          <li>
+              <a class="login-btn" href="{{ url_for('logout') }}">Logout</a>
+          </li>
+      {% else %}
+          <!-- If the user is not logged in, display the login button -->
+          <li>
+              <a class="login-btn" href="{{ url_for('login') }}">Login</a>
+          </li>
+      {% endif %}
+           
+
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6" data-aos="fade-up">
+          <div>
+            <h1>Alzheimer's Disease</h1>
+            <p>
+              Alzheimer's disease is the most common type of dementia. It is a progressive disease beginning with mild
+              memory loss and possibly leading to loss of the ability to carry on a conversation and respond to the
+              environment. Alzheimer's disease involves parts of the brain that control thought, memory, and language.
+            </p>
+            <p>
+              Using this website, you can find out if an MRI image is Alzheimer's disease.
+              It is classified according to four different stages of Alzheimer's disease.
+            <ol>
+              <li>Mild Demented</li>
+              <li>Moderate Demented</li>
+              <li>Non Demented</li>
+              <li>Very Mild Demented</li>
+            </ol>
+            </p>
+            <h2>Upload your MRI image, then learn if you have Alzheimer's disease or not.</h2>
+          
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-up">
+          <img src="static/assets/img/Blue-Brain.png" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Disease Classifier Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-title">
+          <h2>Alzheimer's Disease Classifier</h2>
+          <h4>Upload your MRI image, then learn if you have Alzheimer's disease or not.</h4>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-12">
+            <form class="form-horizontal" action="/submit" method="post" enctype="multipart/form-data">
+
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd">Upload Your Image:</label>
+                <div class="col-lg-12">
+                  </br>
+                  <input type="file" class="form-control" placeholder="Hours Studied" name="my_image" id="pwd">
+                  </br>
+                </div>
+              </div>
+              </br>
+              <div class="form-group">
+                <div class="col-lg-2">
+                  <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+              </div>
+            </form>
+
+            {% if prediction %}
+            </br>
+            <img src="{{img_path}}" height="400px" width="400px">
+            </br>
+            </br>
+            <h2> Alzheimer Disease Prediction : <i> {{prediction}} </i></h2>
+
+            {% endif %}
+
+
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Disease Classifier Section -->
+
+    <!-- ======= App Features Section ======= -->
+    <section id="features" class="features">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>About Us</h2>
+          <h6>Alzheimer's Disease is a progressive neurological disorder that affects millions of individuals worldwide, often beginning with subtle memory loss and gradually impacting a person’s ability to communicate and respond to their surroundings. This disease, the most common type of dementia, affects crucial areas of the brain responsible for thought, memory, and language. As Alzheimer's advances, it imposes significant challenges on both individuals and their families.
+
+            Our website aims to support early and accurate detection of Alzheimer's disease by analyzing MRI images. Using advanced machine learning models, our system classifies MRI images into one of four stages:
+            
+            Non Demented: No signs of dementia are detected.
+            Very Mild Demented: Initial symptoms appear, with minimal impact on daily activities.
+            Mild Demented: Noticeable symptoms affect memory and thinking but are manageable with support.
+            Moderate Demented: Advanced symptoms that significantly affect day-to-day life.
+            Our goal is to empower individuals and healthcare providers with a tool that aids in identifying Alzheimer's disease stages. Early detection can be crucial for planning and managing care, allowing individuals and their families to make informed decisions about treatment and lifestyle adjustments.
+          </h6>
+          
+        </div>
+
+        
+
+      </div>
+    </section><!-- End App Features Section -->
+
+
+  </main><!-- End #main -->
+
+
+  <!-- Vendor JS Files -->
+  <script src="static/assets/vendor/aos/aos.js"></script>
+  <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="static/assets/js/main.js"></script>
+
+</body>
+
+</html>
