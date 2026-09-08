@@ -295,7 +295,7 @@ This project is licensed under the [MIT License](LICENSE).
 ## 👤 Author
 
 **Malaika Umbreen**    
-🔗 [GitHub](https://github.com/MalaikaUmbreen) | [LinkedIn](https://linkedin.com/in/malaika-umbreen)
+🔗 [GitHub](https://github.com/malaika-umbreen) | [LinkedIn](https://linkedin.com/in/malaika-umbreen)
 
 ---
 
